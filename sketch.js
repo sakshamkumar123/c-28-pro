@@ -3,7 +3,7 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
-
+const Constraint = Matter.Constraint;
 
 function preload()
 {
@@ -26,7 +26,7 @@ function setup() {
 	m3=new Mango(620,150)
 	m4=new Mango(650,230)
 	m5=new Mango(700,250)
-    chain=new Chain(stone,{x:155,y:440})
+    chain=new Slingshot(stone.body,{x:155,y:440})
 
 	Engine.run(engine);
   
@@ -46,9 +46,15 @@ function draw() {
   m3.display();
   m4.display();
   m5.display();
+  chain.display()
   drawSprites();
  
 }
-
+function mouseDragged(){
+  Matter.Body.setPosition(stone.body,{x:mouseX,y:mouseY})
+}
+function mouseReleased(){
+  chain.fly()
+}
 
 
